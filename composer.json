@@ -1,0 +1,31 @@
+{
+    "name": "nodes/counter-cache",
+    "description": "Counter caching for Laravel",
+    "keywords": [
+        "nodes",
+        "counter cache",
+        "counter-cache",
+        "laravel",
+        "database",
+        "model"
+    ],
+    "license": "MIT",
+    "homepage": "http://nodesagency.com",
+    "authors": [
+        {
+            "name": "Morten Rugaard",
+            "email": "moru@nodes.dk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "nodes/core": "^0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nodes\\CounterCache\\": "src"
+        }
+    },
+    "minimum-stability": "stable"
+}
