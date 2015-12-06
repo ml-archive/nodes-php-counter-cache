@@ -2,14 +2,14 @@
 
 Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/docs).
 
-[![Total downloads](https://img.shields.io/packagist/dt/nodes/core.svg)](https://packagist.org/packages/nodes/core)
-[![Monthly downloads](ttps://img.shields.io/packagist/dm/nodes/core.svg)](https://packagist.org/packages/nodes/core)
-[![Latest release](https://img.shields.io/packagist/v/nodes/core.svg)](https://packagist.org/packages/nodes/core)
-[![Open issues](https://img.shields.io/github/issues/nodes-php/core.svg)](https://github.com/nodes-php/core/issues)
-[![License](https://img.shields.io/packagist/l/nodes/core.svg)](https://packagist.org/packages/nodes/core)
-[![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/core.svg?style=social&label=Star)](https://github.com/nodes-php/core)
-[![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/core.svg?style=social&label=Watch)](https://github.com/nodes-php/core)
-[![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/core.svg?style=social&label=Fork)](https://github.com/nodes-php/core)
+[![Total downloads](https://img.shields.io/packagist/dt/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
+[![Monthly downloads](https://img.shields.io/packagist/dm/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
+[![Latest release](https://img.shields.io/packagist/v/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
+[![Open issues](https://img.shields.io/github/issues/nodes-php/counter-cache.svg)](https://github.com/nodes-php/core/issues)
+[![License](https://img.shields.io/packagist/l/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
+[![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/counter-cache.svg?style=social&label=Star)](https://github.com/nodes-php/counter-cache/stargazers)
+[![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/counter-cache.svg?style=social&label=Watch)](https://github.com/nodes-php/counter-cache/watchers)
+[![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/counter-cache.svg?style=social&label=Fork)](https://github.com/nodes-php/counter-cache/network)
 
 ## Introduction
 One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is the concept of "counter caching".
@@ -36,7 +36,7 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 ```
 "require": {
-    "dingo/api": "1.0.*@dev"
+    "nodes/counter-cache": "^0.1"
 }
 ```
 
