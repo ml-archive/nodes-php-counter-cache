@@ -19,8 +19,10 @@ trait CounterCacheRestored
      */
     public static function bootCounterCacheRestored()
     {
-        static::restored(function($model) {
-            app('Nodes\CounterCache\CounterCache')->count($model);
-        });
+        if (method_exists(__CLASS__, 'restored')) {
+            static::restored(function ($model) {
+                app('Nodes\CounterCache\CounterCache')->count($model);
+            });
+        }
     }
 }

@@ -16,14 +16,14 @@ class CounterCacheException extends NodesException
      * @author Morten Rugaard <moru@nodes.dk>
      *
      * @access public
-     * @param  string      $message
-     * @param  integer     $statusCode
-     * @param  string|null $statusMessage
-     * @param  array       $headers
-     * @param  boolean     $report
+     * @param  string   $message
+     * @param  integer  $code
+     * @param  array    $headers
+     * @param  boolean  $report
+     * @param  string   $severity
      */
-    public function __construct($message = 'Counter cache failed', $statusCode = 500, $statusMessage = 'Counter cache failed', array $headers = [], $report = true)
+    public function __construct($message = 'Counter cache failed', $code = 500, array $headers = [], $report = true, $severity = 'error')
     {
-        parent::__construct($message, $statusCode, $statusMessage, $headers, $report);
+        parent::__construct($message, $code, $headers, $report, $severity);
     }
 }
