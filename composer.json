@@ -19,13 +19,12 @@
         }
     ],
     "require": {
-        "laravel/framework": "5.1.*",
+        "laravel/framework": "5.1.*||5.2.*",
         "nodes/core": "^0.1"
     },
     "autoload": {
         "psr-4": {
             "Nodes\\CounterCache\\": "src"
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
