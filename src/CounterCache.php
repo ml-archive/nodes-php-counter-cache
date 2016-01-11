@@ -72,7 +72,14 @@ class CounterCache
                 // If our model's foreign key has been updated,
                 // we need to update the counter cache for the previous value as well
                 if (!is_null($model->getOriginal($relation->getForeignKey())) && $model->getOriginal($relation->getForeignKey()) != $model->getAttribute($relation->getForeignKey())) {
-                    $this->updateCount($model, $relation, $counterCacheConditions, $model->getOriginal($relation->getForeignKey()), $counterCacheColumnName);
+                    // Retrieve original foreign key
+                    $originalForeignKey = $model->getOriginal($relation->getForeignKey());
+
+                    // Re-instantiate model and fill it with original foreign key
+                    $reModel = $model->newInstance([$relation->getForeignKey() => $originalForeignKey]);
+
+                    // Update the count value for for counter cache column
+                    $this->updateCount($reModel, $reModel->{$relationName}(), $counterCacheConditions, $originalForeignKey, $counterCacheColumnName);
                 }
             }
         }
@@ -138,9 +145,9 @@ class CounterCache
             ->select(DB::raw(sprintf('COUNT(%s.id)', $model->getTable())))
             ->join(
                 DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation', $relationTableName, $relation->getOtherKey(), $relationTableName)),
-                sprintf('%s.%s', $model->getTable(), $relation->getForeignKey()), '=', sprintf('relation.%s', $relation->getOtherKey())
+                $relation->getQualifiedForeignKey(), '=', sprintf('relation.%s', $relation->getOtherKey())
             )
-            ->where(sprintf('%s.%s', $model->getTable(), $relation->getForeignKey()), '=', $foreignKey);
+            ->where($relation->getQualifiedForeignKey(), '=', $this->prepareValue($foreignKey));
 
         // If our relation has additional conditions, we'll need
         // to add them to our query builder that counts the entries
@@ -158,8 +165,22 @@ class CounterCache
 
         // Fire the update query
         // to update counter cache column
-       return (bool) $relation->getBaseQuery()->update([
-           sprintf('%s.%s', $relationTableName, $counterCacheColumnName) => DB::raw(sprintf('(%s)', vsprintf($countQuerySql, $countQuery->getBindings())))
-       ]);
+        return (bool) $relation->getBaseQuery()->update([
+            sprintf('%s.%s', $relationTableName, $counterCacheColumnName) => DB::raw(sprintf('(%s)', vsprintf($countQuerySql, $countQuery->getBindings())))
+        ]);
+    }
+
+    /**
+     * Prepare value for SQL insertion
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @param  string $value
+     * @return integer|string
+     */
+    private function prepareValue($value)
+    {
+        return is_numeric($value) ? $value : sprintf('"%s"', $value);
     }
 }
