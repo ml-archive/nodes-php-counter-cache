@@ -2,11 +2,11 @@
 
 Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/docs).
 
-[![Total downloads](https://img.shields.io/packagist/dt/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
-[![Monthly downloads](https://img.shields.io/packagist/dm/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
-[![Latest release](https://img.shields.io/packagist/v/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
-[![Open issues](https://img.shields.io/github/issues/nodes-php/counter-cache.svg)](https://github.com/nodes-php/core/issues)
-[![License](https://img.shields.io/packagist/l/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/core)
+[![Total downloads](https://img.shields.io/packagist/dt/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/ounter-cache)
+[![Monthly downloads](https://img.shields.io/packagist/dm/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/ounter-cache)
+[![Latest release](https://img.shields.io/packagist/v/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/ounter-cache)
+[![Open issues](https://img.shields.io/github/issues/nodes-php/counter-cache.svg)](https://github.com/nodes-php/ounter-cache/issues)
+[![License](https://img.shields.io/packagist/l/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/ounter-cache)
 [![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/counter-cache.svg?style=social&label=Star)](https://github.com/nodes-php/counter-cache/stargazers)
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/counter-cache.svg?style=social&label=Watch)](https://github.com/nodes-php/counter-cache/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/counter-cache.svg?style=social&label=Fork)](https://github.com/nodes-php/counter-cache/network)
