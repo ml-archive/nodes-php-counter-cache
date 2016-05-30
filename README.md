@@ -11,7 +11,8 @@ Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/doc
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/counter-cache.svg?style=social&label=Watch)](https://github.com/nodes-php/counter-cache/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/counter-cache.svg?style=social&label=Fork)](https://github.com/nodes-php/counter-cache/network)
 
-## Introduction
+## 📝 Introduction
+
 One thing we at [Nodes](http://nodesagency.com) have been missing in [Laravel](http://laravel.com/docs) is the concept of "counter caching".
 
 Laravel comes "out of the box" with the [increment](http://laravel.com/docs/5.1/queries#updates)/[decrement](http://laravel.com/docs/5.1/queries#updates) methods on it's [Eloquent](http://laravel.com/docs/5.1/eloquent) models. But you'll need to manually execute these methods everytime, you've saved/delete stuff with your model.
@@ -25,7 +26,7 @@ The difference between this package and Laravel's [increment](http://laravel.com
 
 This way you're always 100% sure that the value in your "counter cache" column is correct.
 
-## Installation
+## 📦 Installation
 
 To install this package you will need:
 
@@ -36,27 +37,27 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 ```
 "require": {
-    "nodes/counter-cache": "^0.1"
+    "nodes/counter-cache": "^1.0"
 }
 ```
 
 Or you can run the composer require command from your terminal.
 
 ```
-composer require nodes/counter-cache
+composer require nodes/counter-cache:^1.0
 ```
 
 
-## Usage
+## ⚙ Usage
 
 To do.
 
-## Developers / Maintainers
+## 🏆 Credits
 
 This package is developed and maintained by the PHP team at [Nodes Agency](http://nodesagency.com)
 
 [![Follow Nodes PHP on Twitter](https://img.shields.io/twitter/follow/nodesphp.svg?style=social)](https://twitter.com/nodesphp) [![Tweet Nodes PHP](https://img.shields.io/twitter/url/http/nodesphp.svg?style=social)](https://twitter.com/nodesphp)
 
-### License
+## 📄 License
 
 This package is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
