@@ -35,7 +35,7 @@ To install this package you will need:
 
 You must then modify your `composer.json` file and run `composer update` to include the latest version of the package in your project.
 
-```
+```json
 "require": {
     "nodes/counter-cache": "^1.0"
 }
@@ -43,7 +43,7 @@ You must then modify your `composer.json` file and run `composer update` to incl
 
 Or you can run the composer require command from your terminal.
 
-```
+```bash
 composer require nodes/counter-cache:^1.0
 ```
 
