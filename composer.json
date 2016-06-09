@@ -20,7 +20,7 @@
     ],
     "require": {
         "laravel/framework": "5.1.*||5.2.*",
-        "nodes/core": "1.0"
+        "nodes/core": "^1.0"
     },
     "autoload": {
         "psr-4": {
