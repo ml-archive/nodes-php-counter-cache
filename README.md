@@ -10,6 +10,7 @@ Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/doc
 [![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/counter-cache.svg?style=social&label=Star)](https://github.com/nodes-php/counter-cache/stargazers)
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/counter-cache.svg?style=social&label=Watch)](https://github.com/nodes-php/counter-cache/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/counter-cache.svg?style=social&label=Fork)](https://github.com/nodes-php/counter-cache/network)
+[![StyleCI](https://styleci.io/repos/47500408/shield)](https://styleci.io/repos/47500408)
 
 ## 📝 Introduction
 
