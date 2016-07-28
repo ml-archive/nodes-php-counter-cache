@@ -1,23 +1,21 @@
 <?php
+
 namespace Nodes\CounterCache\Exceptions;
 
 /**
- * Class NoEntitiesFoundException
- *
- * @package Nodes\CounterCache\Exceptions
+ * Class NoEntitiesFoundException.
  */
 class NoEntitiesFoundException extends CounterCacheException
 {
     /**
-     * NoEntitiesFoundException constructor
+     * NoEntitiesFoundException constructor.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string   $message
-     * @param  integer  $code
+     * @param  int  $code
      * @param  array    $headers
-     * @param  boolean  $report
+     * @param  bool  $report
      * @param  string   $severity
      */
     public function __construct($message = 'No entities found', $code = 500, array $headers = [], $report = true, $severity = 'error')

@@ -1,16 +1,16 @@
 <?php
+
 namespace Nodes\CounterCache\Traits;
 
 /**
- * Trait CounterCacheDeleted
+ * Trait CounterCacheDeleted.
  *
  * @trait
- * @package Nodes\CounterCache\Traits
  */
 trait CounterCacheDeleted
 {
     /**
-     * The "booting" of trait
+     * The "booting" of trait.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
@@ -19,7 +19,7 @@ trait CounterCacheDeleted
      */
     public static function bootCounterCacheDeleted()
     {
-        static::deleted(function($model) {
+        static::deleted(function ($model) {
             app('Nodes\CounterCache\CounterCache')->count($model);
         });
     }

@@ -1,23 +1,21 @@
 <?php
+
 namespace Nodes\CounterCache\Exceptions;
 
 /**
- * Class NoCounterCachesFound
- *
- * @package Nodes\CounterCache\Exceptions
+ * Class NoCounterCachesFound.
  */
-class NoCounterCachesFound extends CounterCacheException
+class NoCounterCachesFoundException extends CounterCacheException
 {
     /**
-     * NoCounterCachesFound constructor
+     * NoCounterCachesFound constructor.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @param  string    $message
-     * @param  integer   $code
+     * @param  int   $code
      * @param  array     $headers
-     * @param  boolean   $report
+     * @param  bool   $report
      * @param  string    $severity
      */
     public function __construct($message = 'No counter caches found on model', $code = 500, array $headers = [], $report = true, $severity = 'error')

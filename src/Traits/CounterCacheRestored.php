@@ -1,16 +1,16 @@
 <?php
+
 namespace Nodes\CounterCache\Traits;
 
 /**
- * Trait CounterCacheRestored
+ * Trait CounterCacheRestored.
  *
  * @trait
- * @package Nodes\CounterCache\Traits
  */
 trait CounterCacheRestored
 {
     /**
-     * The "booting" of trait
+     * The "booting" of trait.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
