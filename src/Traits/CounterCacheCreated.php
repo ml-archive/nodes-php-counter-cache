@@ -1,16 +1,16 @@
 <?php
+
 namespace Nodes\CounterCache\Traits;
 
 /**
- * Trait CounterCacheCreated
+ * Trait CounterCacheCreated.
  *
  * @trait
- * @package Nodes\CounterCache\Traits
  */
 trait CounterCacheCreated
 {
     /**
-     * The "booting" of trait
+     * The "booting" of trait.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
@@ -19,7 +19,7 @@ trait CounterCacheCreated
      */
     public static function bootCounterCacheCreated()
     {
-        static::created(function($model) {
+        static::created(function ($model) {
             app('Nodes\CounterCache\CounterCache')->count($model);
         });
     }

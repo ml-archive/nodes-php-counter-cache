@@ -1,11 +1,11 @@
 <?php
+
 namespace Nodes\CounterCache\Traits;
 
 /**
- * Trait CounterCache
+ * Trait CounterCache.
  *
  * @trait
- * @package Nodes\CounterCache\Traits
  */
 trait CounterCache
 {
