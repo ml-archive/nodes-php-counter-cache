@@ -51,7 +51,7 @@ composer require nodes/counter-cache:^1.0
 
 ## ⚙ Usage
 
-To do.
+Please refer to the [Wiki documentation](https://github.com/nodes-php/counter-cache/wiki) for more information.
 
 ## 🏆 Credits
 
