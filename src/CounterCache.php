@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Database\Eloquent\Relations\Relation as IlluminateRelation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Nodes\CounterCache\Exceptions\NoCounterCachesFound;
+use Nodes\CounterCache\Exceptions\NoCounterCachesFoundException;
 use Nodes\CounterCache\Exceptions\NoEntitiesFoundException;
 use Nodes\CounterCache\Exceptions\NotCounterCacheableException;
 use Nodes\CounterCache\Exceptions\RelationNotFoundException;
@@ -23,7 +23,7 @@ class CounterCache
      *
      * @param  \Illuminate\Database\Eloquent\Model $model
      * @return bool
-     * @throws \Nodes\CounterCache\Exceptions\NoCounterCachesFound
+     * @throws \Nodes\CounterCache\Exceptions\NoCounterCachesFoundException
      * @throws \Nodes\CounterCache\Exceptions\NotCounterCacheableException
      * @throws \Nodes\CounterCache\Exceptions\RelationNotFoundException
      */
@@ -42,7 +42,7 @@ class CounterCache
         // Validate counter caches
         if (empty($counterCaches)) {
             Log::error(sprintf('[%s] No counter caches found on model [%s].', __CLASS__, get_class($model)));
-            throw new NoCounterCachesFound(sprintf('No counter caches found on model [%s].', __CLASS__, get_class($model)));
+            throw new NoCounterCachesFoundException(sprintf('No counter caches found on model [%s].', __CLASS__, get_class($model)));
         }
 
         // Handle each available counter caches
@@ -140,8 +140,8 @@ class CounterCache
         $countQuery = $model->newQuery()
             ->select(DB::raw(sprintf('COUNT(%s.id)', $model->getTable())))
             ->join(
-                DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation', $relationTableName, $relation->getOtherKey(), $relationTableName)),
-                $relation->getQualifiedForeignKey(), '=', sprintf('relation.%s', $relation->getOtherKey())
+                DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation', $relationTableName, $relation->getOwnerKey(), $relationTableName)),
+                $relation->getQualifiedForeignKey(), '=', sprintf('relation.%s', $relation->getOwnerKey())
             )
             ->where($relation->getQualifiedForeignKey(), '=', $this->prepareValue($foreignKey));
 
