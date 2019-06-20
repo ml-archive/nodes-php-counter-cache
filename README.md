@@ -1,6 +1,7 @@
 ## Counter Cache
 
-**This package is deprecated** 
+⚠️**This package is deprecated**⚠️
+
 
 Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/docs).
 
