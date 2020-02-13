@@ -35,6 +35,7 @@ class CounterCache
         // interface, we'll jump ship and abort.
         if (!$model instanceof CounterCacheable) {
             Log::error(sprintf('[%s] Model [%s] does not implement CounterCacheable.', __CLASS__, get_class($model)));
+
             throw new NotCounterCacheableException(sprintf('Model [%s] does not implement CounterCacheable.', __CLASS__, get_class($model)));
         }
 
@@ -44,6 +45,7 @@ class CounterCache
         // Validate counter caches
         if (empty($counterCaches)) {
             Log::error(sprintf('[%s] No counter caches found on model [%s].', __CLASS__, get_class($model)));
+
             throw new NoCounterCachesFoundException(sprintf('No counter caches found on model [%s].', __CLASS__, get_class($model)));
         }
 
@@ -60,6 +62,7 @@ class CounterCache
                 // we'll just make a quick validation, that it actually exists
                 if (!method_exists($model, $relationName)) {
                     Log::error(sprintf('[%s] Relation [%s] was not found on model [%s]', __CLASS__, $relationName, get_class($model)));
+
                     throw new RelationNotFoundException(sprintf('Relation [%s] was not found on model [%s]', __CLASS__, $relationName, get_class($model)));
                 }
 
@@ -110,6 +113,7 @@ class CounterCache
         // throw an exception and abort.
         if (!$entities->isEmpty()) {
             Log::error(sprintf('[%s] No entities found of model [%s]', __CLASS__, get_class($model)));
+
             throw new NoEntitiesFoundException(sprintf('No entities found of model [%s]', get_class($model)));
         }
 
