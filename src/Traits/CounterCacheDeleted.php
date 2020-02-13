@@ -15,6 +15,7 @@ trait CounterCacheDeleted
      * @author Morten Rugaard <moru@nodes.dk>
      *
      * @static
+     *
      * @return void
      */
     public static function bootCounterCacheDeleted()

@@ -21,18 +21,21 @@ class CounterCache
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  \Illuminate\Database\Eloquent\Model $model
-     * @return bool
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
      * @throws \Nodes\CounterCache\Exceptions\NoCounterCachesFoundException
      * @throws \Nodes\CounterCache\Exceptions\NotCounterCacheableException
      * @throws \Nodes\CounterCache\Exceptions\RelationNotFoundException
+     *
+     * @return bool
      */
     public function count(IlluminateModel $model)
     {
         // If model does not implement the CounterCacheable
         // interface, we'll jump ship and abort.
-        if (! $model instanceof CounterCacheable) {
+        if (!$model instanceof CounterCacheable) {
             Log::error(sprintf('[%s] Model [%s] does not implement CounterCacheable.', __CLASS__, get_class($model)));
+
             throw new NotCounterCacheableException(sprintf('Model [%s] does not implement CounterCacheable.', __CLASS__, get_class($model)));
         }
 
@@ -42,6 +45,7 @@ class CounterCache
         // Validate counter caches
         if (empty($counterCaches)) {
             Log::error(sprintf('[%s] No counter caches found on model [%s].', __CLASS__, get_class($model)));
+
             throw new NoCounterCachesFoundException(sprintf('No counter caches found on model [%s].', __CLASS__, get_class($model)));
         }
 
@@ -52,12 +56,13 @@ class CounterCache
             foreach ((array) $relations as $relationName => $counterCacheConditions) {
                 // Sometimes our counter cache might require additional conditions
                 // which means, we need to support both scenarios
-                $relationName = ! is_array($counterCacheConditions) ? $counterCacheConditions : $relationName;
+                $relationName = !is_array($counterCacheConditions) ? $counterCacheConditions : $relationName;
 
                 // When we've figured out the name of our relation
                 // we'll just make a quick validation, that it actually exists
-                if (! method_exists($model, $relationName)) {
+                if (!method_exists($model, $relationName)) {
                     Log::error(sprintf('[%s] Relation [%s] was not found on model [%s]', __CLASS__, $relationName, get_class($model)));
+
                     throw new RelationNotFoundException(sprintf('Relation [%s] was not found on model [%s]', __CLASS__, $relationName, get_class($model)));
                 }
 
@@ -69,7 +74,7 @@ class CounterCache
 
                 // If our model's foreign key has been updated,
                 // we need to update the counter cache for the previous value as well
-                if (! is_null($model->getOriginal($relation->getForeignKey())) && $model->getOriginal($relation->getForeignKey()) != $model->getAttribute($relation->getForeignKey())) {
+                if (!is_null($model->getOriginal($relation->getForeignKey())) && $model->getOriginal($relation->getForeignKey()) != $model->getAttribute($relation->getForeignKey())) {
                     // Retrieve original foreign key
                     $originalForeignKey = $model->getOriginal($relation->getForeignKey());
 
@@ -90,12 +95,14 @@ class CounterCache
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  \Illuminate\Database\Eloquent\Model $model
-     * @return bool
+     * @param \Illuminate\Database\Eloquent\Model $model
+     *
      * @throws \Nodes\CounterCache\Exceptions\NoEntitiesFoundException
      * @throws \Nodes\CounterCache\Exceptions\NoCounterCachesFound
      * @throws \Nodes\CounterCache\Exceptions\NotCounterCacheableException
      * @throws \Nodes\CounterCache\Exceptions\RelationNotFoundException
+     *
+     * @return bool
      */
     public function countAll(IlluminateModel $model)
     {
@@ -104,8 +111,9 @@ class CounterCache
 
         // If no entities found, we'll log the error,
         // throw an exception and abort.
-        if (! $entities->isEmpty()) {
+        if (!$entities->isEmpty()) {
             Log::error(sprintf('[%s] No entities found of model [%s]', __CLASS__, get_class($model)));
+
             throw new NoEntitiesFoundException(sprintf('No entities found of model [%s]', get_class($model)));
         }
 
@@ -122,11 +130,12 @@ class CounterCache
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  \Illuminate\Database\Eloquent\Model              $model
-     * @param  \Illuminate\Database\Eloquent\Relations\Relation $relation
-     * @param  array|null                                       $counterCacheConditions
-     * @param  string                                           $foreignKey
-     * @param  string                                           $counterCacheColumnName
+     * @param \Illuminate\Database\Eloquent\Model              $model
+     * @param \Illuminate\Database\Eloquent\Relations\Relation $relation
+     * @param array|null                                       $counterCacheConditions
+     * @param string                                           $foreignKey
+     * @param string                                           $counterCacheColumnName
+     *
      * @return bool
      */
     protected function updateCount(IlluminateModel $model, IlluminateRelation $relation, $counterCacheConditions, $foreignKey, $counterCacheColumnName)
@@ -171,7 +180,8 @@ class CounterCache
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return int|string
      */
     private function prepareValue($value)

@@ -9,7 +9,7 @@ namespace Nodes\CounterCache\Traits;
  */
 trait CounterCache
 {
-    use CounterCacheSaved,
-        CounterCacheDeleted,
-        CounterCacheRestored;
+    use CounterCacheSaved;
+    use CounterCacheDeleted;
+    use CounterCacheRestored;
 }
