@@ -1,8 +1,5 @@
 ## Counter Cache
 
-⚠️**This package is deprecated**⚠️
-
-
 Brings the ruby concept of "counter caching" to [Laravel](http://laravel.com/docs).
 
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/counter-cache.svg)](https://packagist.org/packages/nodes/counter-cache)
@@ -54,7 +51,7 @@ composer require nodes/counter-cache:^1.0
 
 ## ⚙ Usage
 
-Please refer to the [Wiki documentation](https://github.com/nodes-php/counter-cache/wiki) for more information.
+To do.
 
 ## 🏆 Credits
 
