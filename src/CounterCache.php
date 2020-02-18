@@ -2,6 +2,7 @@
 
 namespace Nodes\CounterCache;
 
+use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
 use Illuminate\Database\Eloquent\Relations\Relation as IlluminateRelation;
 use Illuminate\Support\Facades\DB;
@@ -69,20 +70,40 @@ class CounterCache
                 // Retrieve relation query builder
                 $relation = $model->{$relationName}();
 
-                // Update the count value for counter cache column
-                $this->updateCount($model, $relation, $counterCacheConditions, $model->getAttribute($relation->getForeignKey()), $counterCacheColumnName);
+                try {
+                    // Update the count value for counter cache column
+                    $this->updateCount($model, $relation, $counterCacheConditions, $model->getAttribute($relation->getForeignKey()), $counterCacheColumnName);
 
-                // If our model's foreign key has been updated,
-                // we need to update the counter cache for the previous value as well
-                if (!is_null($model->getOriginal($relation->getForeignKey())) && $model->getOriginal($relation->getForeignKey()) != $model->getAttribute($relation->getForeignKey())) {
-                    // Retrieve original foreign key
-                    $originalForeignKey = $model->getOriginal($relation->getForeignKey());
+                    // If our model's foreign key has been updated,
+                    // we need to update the counter cache for the previous value as well
+                    if (!is_null($model->getOriginal($relation->getForeignKey())) && $model->getOriginal($relation->getForeignKey()) != $model->getAttribute($relation->getForeignKey())) {
+                        // Retrieve original foreign key
+                        $originalForeignKey = $model->getOriginal($relation->getForeignKey());
 
-                    // Re-instantiate model and fill it with original foreign key
-                    $reModel = $model->newInstance([$relation->getForeignKey() => $originalForeignKey]);
+                        // Re-instantiate model and fill it with original foreign key
+                        $reModel = $model->newInstance([$relation->getForeignKey() => $originalForeignKey]);
 
-                    // Update the count value for for counter cache column
-                    $this->updateCount($reModel, $reModel->{$relationName}(), $counterCacheConditions, $originalForeignKey, $counterCacheColumnName);
+                        // Update the count value for for counter cache column
+                        $this->updateCount($reModel, $reModel->{$relationName}(), $counterCacheConditions,
+                            $originalForeignKey, $counterCacheColumnName);
+                    }
+                } catch (BadMethodCallException $e) {
+                    // Update the count value for counter cache column
+                    $this->updateCount($model, $relation, $counterCacheConditions, $model->getAttribute($relation->getQualifiedForeignKeyName()), $counterCacheColumnName);
+
+                    // If our model's foreign key has been updated,
+                    // we need to update the counter cache for the previous value as well
+                    if (!is_null($model->getOriginal($relation->getQualifiedForeignKeyName())) && $model->getOriginal($relation->getQualifiedForeignKeyName()) != $model->getAttribute($relation->getQualifiedForeignKeyName())) {
+                        // Retrieve original foreign key
+                        $originalForeignKey = $model->getOriginal($relation->getQualifiedForeignKeyName());
+
+                        // Re-instantiate model and fill it with original foreign key
+                        $reModel = $model->newInstance([$relation->getQualifiedForeignKeyName() => $originalForeignKey]);
+
+                        // Update the count value for for counter cache column
+                        $this->updateCount($reModel, $reModel->{$relationName}(), $counterCacheConditions,
+                            $originalForeignKey, $counterCacheColumnName);
+                    }
                 }
             }
         }
@@ -146,14 +167,21 @@ class CounterCache
         // Generate query builder for counting entries
         // on our model. Result will be used as value when
         // we're updating the counter cache column on the relation
-        $countQuery = $model->newQuery()
-            ->select(DB::raw(sprintf('COUNT(%s.id)', $model->getTable())))
-            ->join(
-                DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation', $relationTableName, $relation->getOwnerKey(), $relationTableName)),
-                $relation->getQualifiedForeignKey(), '=', sprintf('relation.%s', $relation->getOwnerKey())
-            )
-            ->where($relation->getQualifiedForeignKey(), '=', $this->prepareValue($foreignKey));
-
+        try {
+            $countQuery = $model->newQuery()->select(DB::raw(sprintf('COUNT(%s.id)',
+                $model->getTable())))->join(DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation',
+                $relationTableName, $relation->getOwnerKey(), $relationTableName)),
+                $relation->getQualifiedForeignKey(), '=', sprintf('relation.%s',
+                    $relation->getOwnerKey()))->where($relation->getQualifiedForeignKey(), '=',
+                $this->prepareValue($foreignKey));
+        } catch (BadMethodCallException $e) {
+            $countQuery = $model->newQuery()->select(DB::raw(sprintf('COUNT(%s.id)',
+                $model->getTable())))->join(DB::raw(sprintf('(SELECT %s.%s FROM %s) as relation',
+                $relationTableName, $relation->getOwnerKeyName(), $relationTableName)),
+                $relation->getQualifiedForeignKeyName(), '=', sprintf('relation.%s',
+                    $relation->getOwnerKeyName()))->where($relation->getQualifiedForeignKeyName(), '=',
+                $this->prepareValue($foreignKey));
+        }
         // If our relation has additional conditions, we'll need
         // to add them to our query builder that counts the entries
         if (is_array($counterCacheConditions)) {
